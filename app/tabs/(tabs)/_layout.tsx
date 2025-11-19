@@ -2,6 +2,8 @@ import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+import Header from '@/components/Layout/Header';
+import { Contact, House, MessageSquareText, PackageSearch, PhoneCall } from 'lucide-react-native';
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
@@ -14,23 +16,36 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
+        header: () => <Header />,
       }}
     >
       <Tabs.Screen
-        name="tab1"
+        name="home"
         options={{
-          title: 'Tab 1',
-          tabBarIcon: ({ color }) => <TabBarIcon name="star-o" color={color} />,
+          title: 'Home',
+          tabBarIcon: ({ color }) => <House size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="tab2"
+        name="call"
         options={{
-          title: 'Tab 2',
-          tabBarIcon: ({ color }) => <TabBarIcon name="star-o" color={color} />,
+          title: 'Call',
+          tabBarIcon: ({ color }) => <PhoneCall size={20} color={color} />,
+        }}
+      />
+       <Tabs.Screen
+        name="chat"
+        options={{
+          title: 'Message',
+          tabBarIcon: ({ color }) => <MessageSquareText size={20} color={color} /> ,
+        }}
+      />
+        <Tabs.Screen
+        name="jobs"
+        options={{
+          title: 'Jobs',
+          tabBarIcon: ({ color }) => <PackageSearch size={22} color={color} /> ,
         }}
       />
     </Tabs>
