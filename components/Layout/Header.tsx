@@ -45,6 +45,11 @@ const Header = () => {
                             style={{ width: 40, height: 40 }}
                         />
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => router.push('/otherscreens/ProfilesAdd')}
+                    >
+                        <Text>Add</Text>
+                    </TouchableOpacity>
                 </View>
 
             </View>

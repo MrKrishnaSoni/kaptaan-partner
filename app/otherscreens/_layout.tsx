@@ -178,6 +178,53 @@ const _layout = () => {
                 }}
             />
 
+            <Stack.Screen name="ProfilesAdd"
+                options={{
+                    header: () => <SecondHeader title="Profiles" />,
+                }}
+            />
+
+            <Stack.Screen name="ProfileDetails"
+                options={{
+                    header: () => <SecondHeader title="House" />,
+                }}
+            />
+
+            <Stack.Screen name="AddedCategory"
+                options={{
+                    header: () => <SecondHeader title="Businesses" />,
+                }}
+            />
+
+            <Stack.Screen name="UploadDocs"
+                options={{
+                    header: () => <SecondHeader title="Upload Documents" />,
+                }}
+            />
+
+            <Stack.Screen name="AnalyzeDocs"
+                options={{
+                    header: () => (
+                        <SecondHeader
+                            title="Analyze Documents"
+                            rightElement={
+                                <TouchableOpacity onPress={() => router.push("/")}>
+                                    <View className='bg-[#434BEA] px-4 py-2 rounded-full'>
+                                        <Text className='text-white text-base font-semibold'>Save</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            }
+                        />
+                    ),
+                }}
+            />
+
+               <Stack.Screen name="UploadCheckDocs"
+                options={{
+                    header: () => <SecondHeader title="Upload Document" />,
+                }}
+            />
+
         </Stack>
     )
 }
