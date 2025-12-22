@@ -1,13 +1,17 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { Upload } from "lucide-react-native";
 
 const AnalyzeDocs = () => {
     return (
-        <View className="flex-1 bg-white items-center justify-center px-4">
-
+        <View className="flex-1 bg-white">
+            <Image
+                source={require('../../assets/images/bgDcos.png')}
+                className="h-[71px] mb-6"
+                resizeMode="cover"
+            />
             {/* Upload Container */}
-            <View className="w-full h-[90%] border border-gray-300 rounded-2xl items-center justify-center">
+            <View className="h-[80%] mx-4 border border-gray-300 rounded-2xl items-center justify-center">
 
                 {/* Text */}
                 <Text className="text-base font-normal text-gray-700 mb-1">

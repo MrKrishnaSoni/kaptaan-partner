@@ -219,9 +219,46 @@ const _layout = () => {
                 }}
             />
 
-               <Stack.Screen name="UploadCheckDocs"
+            <Stack.Screen name="UploadCheckDocs"
                 options={{
                     header: () => <SecondHeader title="Upload Document" />,
+                }}
+            />
+
+            <Stack.Screen name="DocumentDetails"
+                options={{
+                    header: () => (
+                        <SecondHeader
+                            title="Document Details"
+                            rightElement={
+                                <View className='flex-row gap-3 items-center justify-center'>
+                                    <TouchableOpacity onPress={() => router.push("/")} className='border border-[#E2E2E2] px-4 py-2 rounded-full flex-row items-center justify-center gap-2'>
+                                        <Upload color='#434BEA' size={18} />
+                                        <Text className='text-[#434BEA] text-base font-normal'>Update</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => router.push("/")} className='border border-[#E2E2E2] p-2 rounded-full flex-row items-center justify-center gap-2'>
+                                        <Trash2 color='#B3261E' size={18} />
+                                    </TouchableOpacity>
+                                </View>
+                            }
+                        />
+                    ),
+                }}
+            />
+
+            <Stack.Screen name="WarrentyDocs"
+                options={{
+                    header: () => (
+                        <SecondHeader
+                            title="Warranty Agreement"
+                            rightElement={
+                                <TouchableOpacity onPress={() => router.push("/")} className='bg-[#434BEA] px-4 py-2 rounded-full flex-row items-center justify-center gap-2'>
+                                    <Upload color='#fff' size={18} />
+                                    <Text className='text-white text-base font-semibold'>Add More</Text>
+                                </TouchableOpacity>
+                            }
+                        />
+                    ),
                 }}
             />
 

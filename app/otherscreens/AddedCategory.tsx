@@ -89,7 +89,7 @@ const AddedCategory = () => {
             <TouchableOpacity
                 activeOpacity={0.85}
                 className="bg-[#434BEA] px-4 py-4 rounded-full mx-4 mb-4 items-center"
-                onPress={() => router.push("/otherscreens/UploadCheckDocs")}
+                onPress={() => router.push("/otherscreens/WarrentyDocs")}
             >
                 <Text className="text-white text-base font-medium uppercase">
                     Add New Business
