@@ -2,7 +2,7 @@ import { Stack } from 'expo-router'
 import React from 'react'
 import SecondHeader from '@/components/Layout/SecondHeader'
 import { HStack } from '@/components/ui/hstack'
-import { Bookmark, EllipsisVertical, Plus, Trash2, Upload } from 'lucide-react-native'
+import { Bookmark, EllipsisVertical, Pencil, Plus, Trash2, Upload } from 'lucide-react-native'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { useRouter } from "expo-router";
 
@@ -256,6 +256,28 @@ const _layout = () => {
                                     <Upload color='#fff' size={18} />
                                     <Text className='text-white text-base font-semibold'>Add More</Text>
                                 </TouchableOpacity>
+                            }
+                        />
+                    ),
+                }}
+            />
+
+            <Stack.Screen name="CompanyStatusCard"
+                options={{
+                    header: () => (
+                        <SecondHeader
+                            title="Profile"
+                            rightElement={
+                                <View className='flex-row gap-3 items-center justify-center'>
+                                    <TouchableOpacity onPress={() => router.push("/")} className='border border-[#006CB7] px-4 py-2 rounded-full flex-row items-center justify-center gap-2'>
+                                        <Pencil color='#434BEA' size={18} />
+                                        <Text className='text-[#434BEA] text-base font-normal'>Edit</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => router.push("/")} className='border border-[#F5000E] p-2 rounded-full flex-row items-center justify-center gap-2'>
+                                        <Trash2 color='#F5000E' size={18} />
+                                        <Text className='text-[#F5000E] text-base font-normal'>Delete</Text>
+                                    </TouchableOpacity>
+                                </View>
                             }
                         />
                     ),
