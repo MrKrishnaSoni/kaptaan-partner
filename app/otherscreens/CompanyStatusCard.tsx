@@ -6,9 +6,9 @@ import {
     Image,
     TouchableOpacity,
     Pressable,
-    Button,
+    Modal,
 } from "react-native";
-import { ChevronRight, Clock4, ListFilter, Upload } from "lucide-react-native";
+import { ChevronRight, Clock4, ListFilter, Upload, X } from "lucide-react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 /* ----------------------------------
@@ -18,9 +18,9 @@ import { LinearGradient } from "expo-linear-gradient";
 const ServiceCard = ({ title, image }) => {
     return (
         <LinearGradient
-            colors={["#FEF0F0", "#FFEFEF"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 0, y: 1 }}
+            colors={["#FFFFFF", "#E9EAFF"]}
+            start={{ x: 1, y: 1 }}
+            end={{ x: 0, y: 0 }}
             className="flex-1 rounded-2xl items-center py-6 gap-2"
             style={{
                 shadowColor: "#000",
@@ -46,9 +46,21 @@ const ServiceCard = ({ title, image }) => {
 const ListRow = ({ icon, title, subtitle, badge }) => {
     return (
         <TouchableOpacity className="flex-row items-center py-4 border-b border-[#EFEFEF]">
-            <View className="w-10 h-10 rounded-lg bg-[#FFF2E8] items-center justify-center mr-3">
+            <LinearGradient
+                colors={["#FFFFFF", "#E9EAFF"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 0 }}
+                className="w-10 h-10 rounded-lg  items-center justify-center mr-3"
+                style={{
+                    shadowColor: "#000",
+                    shadowOffset: { width: 0, height: 3 },
+                    shadowOpacity: 0.1,
+                    shadowRadius: 4,
+                    elevation: 4,
+                }}
+            >
                 <Image source={icon} className="w-5 h-5" resizeMode="contain" />
-            </View>
+            </LinearGradient>
 
             <View className="flex-1">
                 {subtitle && (
@@ -72,12 +84,13 @@ const ListRow = ({ icon, title, subtitle, badge }) => {
    TAB CONTENTS
 ---------------------------------- */
 
-const ToolsTab = () => (
+const ToolsTab = ({ onAnalysePress }) => (
     <View className="mt-4">
         <View className="mb-4 flex-row justify-between items-center">
             <Text className="text-lg font-medium text-[#212121]">Tools</Text>
             <TouchableOpacity
                 activeOpacity={0.85}
+                onPress={onAnalysePress}
                 className="border border-[#434BEA] px-3 flex-row gap-2 py-3 rounded-full items-center"
             >
                 <Image
@@ -149,90 +162,175 @@ const CollectionsTab = () => (
 const CompanyStatusCard = () => {
     const tabs = ["Tools", "Recent Activities", "Collections"];
     const [activeTab, setActiveTab] = useState("Tools");
+    const [showAnalyseModal, setShowAnalyseModal] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <ScrollView className="flex-1 bg-white" contentContainerStyle={{ paddingBottom: 40 }}>
+        <>
+            <ScrollView className="flex-1 bg-white" contentContainerStyle={{ paddingBottom: 40 }}>
 
-            {/* Banner */}
-            <Image
-                source={require("../../assets/images/Assets.png")}
-                className="w-full h-36"
-                resizeMode="cover"
-            />
+                {/* Banner */}
+                <Image
+                    source={require("../../assets/images/Assets.png")}
+                    className="w-full h-36"
+                    resizeMode="cover"
+                />
 
-            {/* Company Info */}
-            <View className="bg-white border border-[#E8E9FF] rounded-xl -mt-10 mx-4 px-4 py-4 flex-row gap-4 items-center">
-                <Image source={require("../../assets/images/mahi.png")} className="w-16 h-16" resizeMode="contain" />
-                <View>
-                    <Text className="text-lg font-semibold">Mahindra & Mahindra</Text>
-                    <Text className="text-sm text-gray-600">Tractor Manufacturer</Text>
+                {/* Company Info */}
+                <View className="bg-white border border-[#E8E9FF] rounded-xl -mt-10 mx-4 px-4 py-4 flex-row gap-4 items-center">
+                    <Image source={require("../../assets/images/mahi.png")} className="w-16 h-16" resizeMode="contain" />
+                    <View>
+                        <Text className="text-lg font-semibold">Mahindra & Mahindra</Text>
+                        <Text className="text-sm text-gray-600">Tractor Manufacturer</Text>
+                    </View>
                 </View>
-            </View>
 
-            <View className="px-6 pt-5">
+                <View className="px-6 pt-5">
 
-                {/* Status Card */}
-                <View className="bg-white rounded-xl border border-[#E8E9FF] px-4 py-4 shadow-sm">
-                    <View className="flex-row gap-3">
-                        <Image source={require("../../assets/images/bi_house.png")} className="w-12 h-12" resizeMode="contain" />
+                    {/* Status Card */}
+                    <View className="bg-white rounded-xl border border-[#E8E9FF] px-4 py-4 shadow-sm">
+                        <View className="flex-row gap-3">
+                            <Image source={require("../../assets/images/bi_house.png")} className="w-12 h-12" resizeMode="contain" />
 
-                        <View className="flex-1">
-                            <Text className="text-sm font-medium text-[#212121]">Business, Bilkul Sorted!</Text>
-                            <Text className="text-[10px] text-[#626262] mt-1 leading-4">
-                                Yeh checklist help karegi aapko har important requirement ko track aur complete karne mein.
-                            </Text>
+                            <View className="flex-1">
+                                <Text className="text-sm font-medium text-[#212121]">Business, Bilkul Sorted!</Text>
+                                <Text className="text-[10px] text-[#626262] mt-1 leading-4">
+                                    Yeh checklist help karegi aapko har important requirement ko track aur complete karne mein.
+                                </Text>
+                            </View>
+
+                            <TouchableOpacity className="w-8 h-8 rounded-full border border-gray-300 items-center justify-center">
+                                <ChevronRight size={16} color="#6B7280" />
+                            </TouchableOpacity>
                         </View>
 
-                        <TouchableOpacity className="w-8 h-8 rounded-full border border-gray-300 items-center justify-center">
-                            <ChevronRight size={16} color="#6B7280" />
-                        </TouchableOpacity>
-                    </View>
-
-                    <View className="flex-row justify-between items-center mt-4">
-                        <Text className="text-[#289C08] text-sm font-medium">75% to complete</Text>
-                        <View className="flex-row items-center gap-1">
-                            <Clock4 size={12} color="#8D8D8D" />
-                            <Text className="text-[8px] text-[#8D8D8D]">39 min</Text>
+                        <View className="flex-row justify-between items-center mt-4">
+                            <Text className="text-[#289C08] text-sm font-medium">75% to complete</Text>
+                            <View className="flex-row items-center gap-1">
+                                <Clock4 size={12} color="#8D8D8D" />
+                                <Text className="text-[8px] text-[#8D8D8D]">39 min</Text>
+                            </View>
                         </View>
-                    </View>
 
-                    <View className="mt-2">
-                        <View className="h-3 bg-gray-200 rounded-full overflow-hidden">
-                            <View className="h-full w-[75%] bg-[#4F46E5] rounded-full flex-row justify-between items-center px-2">
-                                {Array.from({ length: 8 }).map((_, i) => (
-                                    <View key={i} className="w-1.5 h-1.5 bg-white rounded-full opacity-80" />
-                                ))}
+                        <View className="mt-2">
+                            <View className="h-3 bg-gray-200 rounded-full overflow-hidden">
+                                <View className="h-full w-[75%] bg-[#4F46E5] rounded-full flex-row justify-between items-center px-2">
+                                    {Array.from({ length: 8 }).map((_, i) => (
+                                        <View key={i} className="w-1.5 h-1.5 bg-white rounded-full opacity-80" />
+                                    ))}
+                                </View>
                             </View>
                         </View>
                     </View>
-                </View>
 
-                {/* Services */}
-                <View className="flex-row gap-4 mt-5">
-                    <ServiceCard title="Legal Experts" image={require("../../assets/images/icon22.png")} />
-                    <ServiceCard title="Govt. Officer" image={require("../../assets/images/iocn2.png")} />
-                    <ServiceCard title="Kappy Ai" image={require("../../assets/images/icon3.png")} />
-                </View>
+                    {/* Services */}
+                    <View className="flex-row gap-4 mt-5">
+                        <ServiceCard title="Legal Experts" image={require("../../assets/images/icon22.png")} />
+                        <ServiceCard title="Govt. Officer" image={require("../../assets/images/iocn2.png")} />
+                        <ServiceCard title="Kappy Ai" image={require("../../assets/images/icon3.png")} />
+                    </View>
 
-                {/* Tabs */}
-                <View className="flex-row border-b border-[#DEDEDE] mt-8">
-                    {tabs.map(tab => (
-                        <Pressable key={tab} onPress={() => setActiveTab(tab)} className="flex-1 items-center">
-                            <Text className={`text-sm font-medium ${activeTab === tab ? "text-blue-600" : "text-gray-500"}`}>
-                                {tab}
+                    {/* Tabs */}
+                    <View className="flex-row border-b border-[#DEDEDE] mt-8">
+                        {tabs.map(tab => (
+                            <Pressable key={tab} onPress={() => setActiveTab(tab)} className="flex-1 items-center">
+                                <Text className={`text-sm font-medium ${activeTab === tab ? "text-blue-600" : "text-gray-500"}`}>
+                                    {tab}
+                                </Text>
+                                {activeTab === tab && <View className="h-0.5 w-full bg-blue-600 mt-2" />}
+                            </Pressable>
+                        ))}
+                    </View>
+
+                    {/* Tab Content */}
+                    {activeTab === "Tools" && (
+                        <ToolsTab onAnalysePress={() => setShowAnalyseModal(true)} />
+                    )}
+
+                    {activeTab === "Recent Activities" && <ActivitiesTab />}
+                    {activeTab === "Collections" && <CollectionsTab />}
+
+                </View>
+            </ScrollView>
+
+            <Modal
+                visible={showAnalyseModal}
+                transparent
+                animationType="slide"
+                onRequestClose={() => setShowAnalyseModal(false)}
+            >
+                <Pressable
+                    onPress={() => setShowAnalyseModal(false)}
+                    className="flex-1 bg-black/40 justify-end"
+                >
+                    <Pressable className="bg-white rounded-t-2xl">
+
+                        {/* Header */}
+                        <View className="flex-row justify-between items-center mb-4 border-b border-[#DDDDDD] px-4 py-4">
+                            <Text className="text-base font-semibold text-[#5B5B5B]">
+                                Ab sabhi documents ek jagah par
                             </Text>
-                            {activeTab === tab && <View className="h-0.5 w-full bg-blue-600 mt-2" />}
-                        </Pressable>
-                    ))}
-                </View>
+                            <TouchableOpacity onPress={() => setShowAnalyseModal(false)}>
+                                <X size={20} />
+                            </TouchableOpacity>
+                        </View>
 
-                {/* Tab Content */}
-                {activeTab === "Tools" && <ToolsTab />}
-                {activeTab === "Recent Activities" && <ActivitiesTab />}
-                {activeTab === "Collections" && <CollectionsTab />}
+                        <View className="px-4 py-1">
+                            {/* Option 1 */}
+                            <TouchableOpacity className="border border-[#E6E6E6] rounded-xl p-4 flex-row gap-2 justify-center items-center mb-3"
+                                onPressIn={() => setIsHovered(true)}
+                                onPressOut={() => setIsHovered(false)}
+                                style={[
+                                    isHovered && {
+                                        shadowColor: "#000",
+                                        shadowOffset: { width: 0, height: 4 },
+                                        shadowOpacity: 0.25,
+                                        shadowRadius: 4,
+                                        elevation: 4,
+                                    },
+                                ]}>
+                                <Image
+                                    source={require("../../assets/images/bi_house (1).png")}
+                                    className="w-8 h-8"
+                                />
+                                <View>
+                                    <Text className="text-sm font-medium text-[#212121]">
+                                        Generate Document with AI {'\n'} ₹20/-
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
 
-            </View>
-        </ScrollView>
+                            {/* Option 2 */}
+                            <TouchableOpacity className="border border-[#E6E6E6] rounded-xl p-4 flex-row gap-2 justify-center items-center mb-3">
+                                <Image
+                                    source={require("../../assets/images/bi_house (4).png")}
+                                    className="w-8 h-8"
+                                />
+                                <Text className="text-sm font-medium text-[#212121]">
+                                    Already have this document?
+                                </Text>
+                            </TouchableOpacity>
+
+                            {/* Option 3 */}
+                            <TouchableOpacity className="border border-[#E6E6E6] rounded-xl p-4 flex-row gap-2 justify-center items-center">
+                                <Image
+                                    source={require("../../assets/images/bi_house (3).png")}
+                                    className="w-8 h-8"
+                                />
+                                <Text className="text-sm font-medium text-[#212121]">
+                                    Download Sample Template
+                                </Text>
+                            </TouchableOpacity>
+
+                            <Text className="text-[10px] text-center text-[#9CA3AF] mt-4 mb-5">
+                                Ab sab aapke haathon me
+                            </Text>
+                        </View>
+                    </Pressable>
+                </Pressable>
+            </Modal>
+
+        </>
     );
 };
 

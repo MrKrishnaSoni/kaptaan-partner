@@ -269,15 +269,30 @@ const _layout = () => {
                             title="Profile"
                             rightElement={
                                 <View className='flex-row gap-3 items-center justify-center'>
-                                    <TouchableOpacity onPress={() => router.push("/")} className='border border-[#006CB7] px-4 py-2 rounded-full flex-row items-center justify-center gap-2'>
-                                        <Pencil color='#434BEA' size={18} />
+                                    <TouchableOpacity onPress={() => router.push("/")} className='border border-[#434BEA] px-2 py-2 rounded-full flex-row items-center justify-center gap-2'>
+                                        <Pencil color='#434BEA' size={16} />
                                         <Text className='text-[#434BEA] text-base font-normal'>Edit</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={() => router.push("/")} className='border border-[#F5000E] p-2 rounded-full flex-row items-center justify-center gap-2'>
-                                        <Trash2 color='#F5000E' size={18} />
+                                        <Trash2 color='#F5000E' size={16} />
                                         <Text className='text-[#F5000E] text-base font-normal'>Delete</Text>
                                     </TouchableOpacity>
                                 </View>
+                            }
+                        />
+                    ),
+                }}
+            />
+
+            <Stack.Screen name="CheckList"
+                options={{
+                    header: () => (
+                        <SecondHeader
+                            title="Check List"
+                            rightElement={
+                                <TouchableOpacity onPress={() => router.push("/")} className='bg-[#434BEA] px-4 py-2 rounded-full flex-row items-center justify-center gap-2'>
+                                    <Text className='text-white text-base font-semibold'>Done</Text>
+                                </TouchableOpacity>
                             }
                         />
                     ),
